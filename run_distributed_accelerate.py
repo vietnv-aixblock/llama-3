@@ -101,6 +101,7 @@ tokenizer = AutoTokenizer.from_pretrained(
     model_name, add_eos_token=True, use_fast=True, trust_remote_code=True
 )
 EOS_TOKEN = tokenizer.eos_token  # Must add EOS_TOKEN
+tokenizer.pad_token = tokenizer.eos_token  # Must add EOS_TOKEN
 alpaca_prompt = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 
                     ### Instruction:
