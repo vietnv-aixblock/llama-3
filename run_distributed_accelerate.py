@@ -21,8 +21,8 @@ from trl import SFTTrainer
 from logging_class import start_queue, write_log
 
 # ---------------------------------------------------------------------------
-HfFolder.save_token("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")
-wandb.login("allow", "cd65e4ccbe4a97f6b8358f78f8ecf054f21466d9")
+# HfFolder.save_token("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")
+# wandb.login("allow", "cd65e4ccbe4a97f6b8358f78f8ecf054f21466d9")
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 parser = argparse.ArgumentParser(description="AIxBlock")
