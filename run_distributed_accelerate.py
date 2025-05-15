@@ -19,9 +19,11 @@ from transformers import (
 from trl import SFTTrainer
 
 from logging_class import start_queue, write_log
+from huggingface_hub import login
 
 # ---------------------------------------------------------------------------
 # HfFolder.save_token("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")
+login(token="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")
 # wandb.login("allow", "cd65e4ccbe4a97f6b8358f78f8ecf054f21466d9")
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
@@ -92,13 +94,16 @@ else:
     compute_dtype = torch.float16
     attn_implementation = "sdpa"
 torch.set_grad_enabled(True)
-model_name = args.model_id if args.model_id else "meta-llama/Meta-Llama-3-8B-Instruct"
+model_name = args.model_id if args.model_id else "meta-llama/Llama-3.2-1B-Instruct"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 logger.info(f"Using device: {device}")
 
 tokenizer = AutoTokenizer.from_pretrained(
-    model_name, add_eos_token=True, use_fast=True, trust_remote_code=True
+    model_name,
+    add_eos_token=True,
+    use_fast=True,
+    trust_remote_code=True,
 )
 EOS_TOKEN = tokenizer.eos_token  # Must add EOS_TOKEN
 tokenizer.pad_token = tokenizer.eos_token  # Must add EOS_TOKEN
